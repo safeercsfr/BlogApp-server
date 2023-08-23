@@ -3,7 +3,9 @@ const app = express();
 const logger = require("morgan");
 const dotenv = require("dotenv");
 const cookieparser = require("cookie-parser");
-const multer = require("multer");
+const upload=require("./utils/multer")
+const cloudinary = require("./config/cloudinary");
+
 const cors = require("cors");
 dotenv.config();
 
@@ -33,22 +35,24 @@ app.use(logger("dev"));
 
 //FILE UPLOAD
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../client/public/upload");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname);
-  },
-});
-
-const upload = multer({ storage });
-
-app.post("/api/upload", upload.single("file"), function (req, res) {
-  const file = req.file;
-  res.status(200).json(file.filename);
-});
-
+app.post("/api/upload", upload.single("file"), async function (req, res) {
+    try {
+      const file = req.file;
+  
+      // Upload the file to Cloudinary
+      const cloudinaryResponse = await cloudinary.uploader.upload(file.path, {
+        folder: "blog-images",
+        use_filename: true,
+        unique_filename: false 
+      });
+  
+      res.status(200).json(cloudinaryResponse.secure_url);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json("Something went wrong.");
+    }
+  });
+  
 //Routes
 app.use("/api", authRoutes);
 app.use("/api/posts", postRoutes);
