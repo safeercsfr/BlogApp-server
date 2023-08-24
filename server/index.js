@@ -17,7 +17,10 @@ const authRoutes = require("./routes/authRoutes.js");
 const postRoutes = require("./routes/postRoutes.js");
 
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://blog-app-client-ten.vercel.app', // Replace with your allowed origin(s)
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add the allowed HTTP methods
+}));
 app.use(express.json());
 app.use(cookieparser());
 app.use(express.urlencoded({ extended: true }));
