@@ -50,11 +50,6 @@ app.use("/", (req, res) => {
   res.send("works");
 });
 
-app.use(cors({
-  origin: '*',
-}));
-
-
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
