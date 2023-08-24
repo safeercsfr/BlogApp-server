@@ -16,16 +16,6 @@ const { connectdb } = require("./config/db");
 const authRoutes = require("./routes/authRoutes.js");
 const postRoutes = require("./routes/postRoutes.js");
 
-// Configure CORS for specific origins
-// const corsOptions = {
-//   origin: [
-//     "http://localhost:3000",
-//     "https://blog-app-client-17dlq31kc-safeercsfr.vercel.app/",
-//     "https://blog-app-client-ten.vercel.app/",
-//   ],
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   credentials: true,
-// };
 
 app.use(cors());
 app.use(express.json());
