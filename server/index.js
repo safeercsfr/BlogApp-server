@@ -17,7 +17,6 @@ const authRoutes = require("./routes/authRoutes.js");
 const postRoutes = require("./routes/postRoutes.js");
 
 
-app.use(cors());
 app.use(express.json());
 app.use(cookieparser());
 app.use(express.urlencoded({ extended: true }));
@@ -52,7 +51,7 @@ app.use("/", (req, res) => {
 });
 
 app.use(cors({
-  origin: ['https://blog-app-client-ten.vercel.app/'],
+  origin: '*',
 }));
 
 
