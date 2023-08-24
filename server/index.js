@@ -51,6 +51,11 @@ app.use("/", (req, res) => {
   res.send("works");
 });
 
+app.use(cors({
+  origin: ['https://blog-app-client-ten.vercel.app/'],
+}));
+
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
