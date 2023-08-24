@@ -18,8 +18,8 @@ const postRoutes = require("./routes/postRoutes.js");
 
 
 app.use(cors({
-  origin: 'https://blog-app-client-ten.vercel.app', // Replace with your allowed origin(s)
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add the allowed HTTP methods
+  origin: ['https://blog-app-client-ten.vercel.app/', '*'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 app.use(express.json());
 app.use(cookieparser());
